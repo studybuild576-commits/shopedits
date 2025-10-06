@@ -1,0 +1,2 @@
+[build.environment]
+  FLUTTER_VERSION = "3.22.0" # Yahan aap apna Flutter version daal sakte hain
