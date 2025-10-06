@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shop_edits_images/home_page.dart';
-import 'package:shop_edits_images/pages/background_remover_page.dart';
-import 'package:shop_edits_images/pages/placeholder_page.dart';
+// YAHAN BADLAAV KIYA GAYA HAI: Package ka naam theek kiya gaya
+import 'package:shopedits/home_page.dart';
+import 'package:shopedits/pages/background_remover_page.dart';
+import 'package:shopedits/pages/placeholder_page.dart';
 
 void main() {
   runApp(const SnapToolsApp());
