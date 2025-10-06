@@ -33,7 +33,6 @@ class HomePage extends StatelessWidget {
             title: 'ID Card Maker',
             onTap: () => Navigator.pushNamed(context, '/id-card-maker'),
           ),
-          // ... baaki tools ke liye bhi cards
         ],
       ),
     );
@@ -60,7 +59,7 @@ class ToolCard extends StatelessWidget {
           children: [
             Icon(icon, size: 48, color: Theme.of(context).colorScheme.secondary),
             const SizedBox(height: 16),
-            Text(title, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(title, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           ],
         ),
       ),
