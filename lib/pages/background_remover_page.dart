@@ -36,7 +36,7 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
     setState(() => _isLoading = true);
 
     // ‼️ YAHAN APNA HUGGING FACE URL PASTE KAREIN ‼️
-    const String apiUrl = 'https://rahul7273-shop-edits-images.hf.space/run/predict';
+    const String apiUrl = 'https://rahul7273/shop-edits-images.hf.space/run/predict';
 
     try {
       final uri = Uri.parse(apiUrl);
