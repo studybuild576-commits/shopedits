@@ -1,5 +1,5 @@
-import 'dart:convert';
-import 'dart:typed_data';
+import 'dart.convert';
+import 'dart.typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -35,8 +35,8 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
     if (_originalImageBytes == null) return;
     setState(() => _isLoading = true);
 
-    // ‼️ YAHAN APNA HUGGING FACE URL PASTE KAREIN ‼️
-    const String apiUrl = 'https://rahul7273/shop-edits-images.hf.space/run/predict';
+    // ✅ YAHAN AAPKA SAHI, LIVE URL DAAL DIYA GAYA HAI
+    const String apiUrl = 'https://rahul7273-shop-edits-images.hf.space/run/predict';
 
     try {
       final uri = Uri.parse(apiUrl);
@@ -44,6 +44,7 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
       final response = await http.post(
         uri,
         headers: {'Content-Type': 'application/json'},
+        // fn_index: 0 batata hai ki Gradio app ka pehla tool (Background Remover) istemaal karna hai
         body: jsonEncode({ "fn_index": 0, "data": ["data:image/png;base64,$base64Image"] }),
       );
       if (response.statusCode == 200) {
