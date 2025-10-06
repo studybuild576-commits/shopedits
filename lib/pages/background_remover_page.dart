@@ -50,10 +50,10 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
         final data = jsonDecode(response.body)['data'][0].split(',').last;
         setState(() => _processedImageBytes = base64Decode(data));
       } else {
-        setState(() => _errorMessage = 'Error: ${response.statusCode}');
+        setState(() => _errorMessage = 'Error: ${response.statusCode}. Backend is not ready or URL is incorrect.');
       }
     } catch (e) {
-      setState(() => _errorMessage = 'Error: $e');
+      setState(() => _errorMessage = 'Error: $e. Check your internet connection.');
     } finally {
       setState(() => _isLoading = false);
     }
@@ -123,12 +123,21 @@ class ImageDisplay extends StatelessWidget {
           child: Container(
             width: 300,
             height: 300,
-            decoration: BoxDecoration(border: Border.all(color: Colors.grey), borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade700), borderRadius: BorderRadius.circular(12)),
             child: isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : imageBytes != null
                     ? ClipRRect(borderRadius: BorderRadius.circular(11), child: Image.memory(imageBytes!))
-                    : Center(child: Icon(isResult ? Icons.auto_fix_high : Icons.add_photo_alternate_outlined, size: 60, color: Colors.grey)),
+                    : Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(isResult ? Icons.auto_fix_high : Icons.add_photo_alternate_outlined, size: 60, color: Colors.grey),
+                            if (!isResult) const SizedBox(height: 8),
+                            if (!isResult) const Text("Click to Upload")
+                          ],
+                        ),
+                      ),
           ),
         ),
       ],
