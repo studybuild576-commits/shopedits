@@ -1,36 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:shopedits/home_page.dart';
-import 'package:shopedits/pages/background_remover_page.dart';
-import 'package:shopedits/pages/change_background_page.dart';
-import 'package:shopedits/pages/id_card_maker_page.dart';
-// Baaki pages ko yahan import karein...
+import 'home_page.dart';
 
 void main() {
-  runApp(const SnapToolsApp());
+  runApp(const ShopEditsApp());
 }
 
-class SnapToolsApp extends StatelessWidget {
-  const SnapToolsApp({super.key});
+class ShopEditsApp extends StatelessWidget {
+  const ShopEditsApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Shop Edits - Free AI Image Editor',
+      title: 'Shop Edits - AI Image Tools',
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.deepPurpleAccent,
-        scaffoldBackgroundColor: const Color(0xFF121212),
-        colorScheme: ColorScheme.fromSwatch(brightness: Brightness.dark).copyWith(secondary: Colors.deepPurpleAccent),
+        scaffoldBackgroundColor: const Color(0xFF0F0F12),
+        colorScheme: ColorScheme.fromSwatch(brightness: Brightness.dark)
+            .copyWith(secondary: Colors.purpleAccent),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomePage(),
-        '/background-remover': (context) => const BackgroundRemoverPage(),
-        '/change-background': (context) => const ChangeBackgroundPage(),
-        '/id-card-maker': (context) => const IDCardMakerPage(),
-        // Yahan baaki tools ke routes add honge
-      },
       debugShowCheckedModeBanner: false,
+      home: const HomePage(),
     );
   }
 }
