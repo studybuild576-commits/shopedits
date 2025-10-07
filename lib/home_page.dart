@@ -1,81 +1,110 @@
 import 'package:flutter/material.dart';
-import 'widgets/tool_card.dart';
-import 'widgets/review_section.dart';
-import 'pages/background_remover_page.dart';
-import 'pages/change_background_page.dart';
-import 'pages/resize_image_page.dart';
-import 'pages/id_card_page.dart';
-import 'pages/passport_photo_page.dart';
-import 'pages/document_crop_page.dart';
-import 'pages/green_screen_page.dart';
-import 'pages/format_converter_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  final List<_Tool> tools = const [
+    _Tool('Background Remover', 'cut', '/background-remover'),
+    _Tool('Change Background', 'photo_library', '/change-background'),
+    _Tool('Resize Image', 'photo_size_select_large', '/resize-image'),
+    _Tool('ID Card Maker', 'badge', '/id-card-maker'),
+    _Tool('Passport Photo', 'camera_alt', '/passport-photo'),
+    _Tool('Document Cropper', 'content_cut', '/document-cropper'),
+    _Tool('Green Screen', 'grass', '/green-screen'),
+    _Tool('Format Converter', 'swap_horiz', '/format-converter'),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final tools = [
-      {'icon': Icons.cut, 'title': 'Background Remover', 'page': const BackgroundRemoverPage()},
-      {'icon': Icons.image_outlined, 'title': 'Change Background', 'page': const ChangeBackgroundPage()},
-      {'icon': Icons.aspect_ratio, 'title': 'Resize Image', 'page': const ResizeImagePage()},
-      {'icon': Icons.badge_outlined, 'title': 'ID Card Maker', 'page': const IDCardPage()},
-      {'icon': Icons.photo_library_outlined, 'title': 'Passport Photo', 'page': const PassportPhotoPage()},
-      {'icon': Icons.crop, 'title': 'Document Cropper', 'page': const DocumentCropPage()},
-      {'icon': Icons.video_camera_back_outlined, 'title': 'Green Screen', 'page': const GreenScreenPage()},
-      {'icon': Icons.swap_horiz, 'title': 'Format Converter', 'page': const FormatConverterPage()},
-    ];
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('📸 Shop Edits AI'),
+        title: const Text('📸 ShopEdits - All AI Tools'),
         centerTitle: true,
-        backgroundColor: Colors.deepPurpleAccent.withOpacity(0.2),
+        backgroundColor: Colors.deepPurpleAccent,
+        elevation: 6,
       ),
-      body: SingleChildScrollView(
+      body: LayoutBuilder(builder: (context, constraints) {
+        int crossAxisCount = 4;
+        if (constraints.maxWidth < 1200) crossAxisCount = 3;
+        if (constraints.maxWidth < 800) crossAxisCount = 2;
+        if (constraints.maxWidth < 500) crossAxisCount = 1;
+
+        return Padding(
+          padding: const EdgeInsets.all(24),
+          child: GridView.count(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
+            children: tools
+                .map((tool) => _ToolCard(
+                      title: tool.title,
+                      icon: tool.icon,
+                      route: tool.route,
+                    ))
+                .toList(),
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class _Tool {
+  final String title;
+  final String icon;
+  final String route;
+  const _Tool(this.title, this.icon, this.route);
+}
+
+class _ToolCard extends StatelessWidget {
+  final String title;
+  final String icon;
+  final String route;
+  const _ToolCard({required this.title, required this.icon, required this.route, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => Navigator.pushNamed(context, route),
+      borderRadius: BorderRadius.circular(16),
+      hoverColor: Colors.deepPurpleAccent.withOpacity(0.2),
+      child: Card(
+        elevation: 6,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: 280,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/banner.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              alignment: Alignment.center,
-              child: const Text(
-                'Your All-in-One AI Image Editing Studio',
+            Icon(_getIconData(icon), size: 48, color: Colors.deepPurpleAccent),
+            const SizedBox(height: 16),
+            Text(title,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-            ),
-            const SizedBox(height: 24),
-            GridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 4,
-              padding: const EdgeInsets.all(24),
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-              children: [
-                for (var tool in tools)
-                  ToolCard(
-                    icon: tool['icon'] as IconData,
-                    title: tool['title'] as String,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => tool['page'] as Widget),
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: 40),
-            const ReviewSection(),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           ],
         ),
       ),
     );
+  }
+
+  IconData _getIconData(String name) {
+    switch (name) {
+      case 'cut':
+        return Icons.cut;
+      case 'photo_library':
+        return Icons.photo_library;
+      case 'photo_size_select_large':
+        return Icons.photo_size_select_large;
+      case 'badge':
+        return Icons.badge;
+      case 'camera_alt':
+        return Icons.camera_alt;
+      case 'content_cut':
+        return Icons.content_cut;
+      case 'grass':
+        return Icons.grass;
+      case 'swap_horiz':
+        return Icons.swap_horiz;
+      default:
+        return Icons.image;
+    }
   }
 }
