@@ -1,15 +1,7 @@
-import 'package:flutter/material.dart';
-// YAHAN BADLAAV KIYA GAYA HAI: Relative paths ka istemaal kiya gaya hai
-import 'home_page.dart';
-import 'pages/background_remover_page.dart';
-import 'pages/change_background_page.dart';
-import 'pages/document_cropper_page.dart';
-import 'pages/format_converter_page.dart';
-import 'pages/green_screen_page.dart';
-import 'pages/id_card_maker_page.dart';
-import 'pages/passport_photo_page.dart';
-import 'pages/resize_image_page.dart';
+// lib/main.dart
 
+import 'package:flutter/material.dart';
+import 'screens/home_screen.dart'; // HomeScreen को इम्पोर्ट करें
 
 void main() {
   runApp(const ShopEditsApp());
@@ -21,51 +13,51 @@ class ShopEditsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ShopEdits - AI Image Tools',
+      title: 'Shop Edits AI',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.deepPurpleAccent,
-        scaffoldBackgroundColor: const Color(0xFF121212),
-        colorScheme: ColorScheme.fromSwatch(brightness: Brightness.dark)
-            .copyWith(secondary: Colors.deepPurpleAccent),
-        cardTheme: CardTheme(
-          elevation: 6,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+        primarySwatch: Colors.purple,
+        scaffoldBackgroundColor: Colors.grey[100],
+        fontFamily: 'Inter',
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6d28d9),
+          brightness: Brightness.light,
+          primary: const Color(0xFF6d28d9),
+          secondary: Colors.deepPurple.shade300,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 1,
+          centerTitle: true,
+          titleTextStyle: const TextStyle(
+            color: Colors.black87,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+          iconTheme: const IconThemeData(color: Colors.black87),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF6d28d9),
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            textStyle:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(fontSize: 16),
-          titleMedium: TextStyle(fontWeight: FontWeight.bold),
+        cardTheme: CardTheme(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          margin: const EdgeInsets.all(8),
         ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomePage(),
-        '/background-remover': (context) => const BackgroundRemoverPage(),
-        '/change-background': (context) => const ChangeBackgroundPage(),
-        '/resize-image': (context) => const ResizeImagePage(),
-        '/id-card-maker': (context) => const IDCardMakerPage(),
-        '/passport-photo': (context) => const PassportPhotoPage(),
-        '/document-cropper': (context) => const DocumentCropperPage(),
-        '/green-screen': (context) => const GreenScreenPage(),
-        '/format-converter': (context) => const FormatConverterPage(),
-      },
+      home: const HomeScreen(),
     );
   }
 }
-```
-
----
-### ## Ab Kya Karein?
-
-1.  Upar diye gaye code ko `main.dart` file mein **paste** karein.
-2.  File ko **save** karein.
-3.  Changes ko **GitHub par `push` kar dein.**
-    ```bash
-    git add .
-    git commit -m "Fix: Corrected import paths in main.dart"
-    git push
-    
-
