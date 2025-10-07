@@ -35,7 +35,6 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
     if (_originalImageBytes == null) return;
     setState(() => _isLoading = true);
 
-    // ✅ YEH URL BILKUL SAHI HAI
     const String apiUrl = 'https://rahul7273-shop-edits-images.hf.space/run/predict';
 
     try {
@@ -46,8 +45,8 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
         uri,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          "fn_index": 0, 
-          "data": ["data:image/png;base64,$base64Image"]
+          "fn_index": 0, // Batata hai ki Gradio ka pehla tool use karna hai
+          "data": [ "data:image/png;base64,$base64Image" ]
         }),
       );
 
@@ -107,7 +106,7 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
   }
 }
 
-// Helper Widget for Image Display
+// Helper Widget (Aap ise alag file `lib/widgets.dart` mein bhi rakh sakte hain)
 class ImageDisplay extends StatelessWidget {
   final String title;
   final Uint8List? imageBytes;
@@ -133,16 +132,7 @@ class ImageDisplay extends StatelessWidget {
                 ? const Center(child: CircularProgressIndicator())
                 : imageBytes != null
                     ? ClipRRect(borderRadius: BorderRadius.circular(11), child: Image.memory(imageBytes!))
-                    : Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(isResult ? Icons.auto_fix_high : Icons.add_photo_alternate_outlined, size: 60, color: Colors.grey),
-                            if (!isResult) const SizedBox(height: 8),
-                            if (!isResult) const Text("Click to Upload")
-                          ],
-                        ),
-                      ),
+                    : Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(isResult ? Icons.auto_fix_high : Icons.add_photo_alternate_outlined, size: 60, color: Colors.grey), if (!isResult) const SizedBox(height: 8), if (!isResult) const Text("Click to Upload")])),
           ),
         ),
       ],
