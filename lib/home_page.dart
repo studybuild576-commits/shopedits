@@ -24,22 +24,17 @@ class HomePage extends StatelessWidget {
             onTap: () => Navigator.pushNamed(context, '/change-background'),
           ),
           ToolCard(
-            icon: Icons.photo_size_select_large,
-            title: 'Image Resizer',
-            onTap: () => Navigator.pushNamed(context, '/image-resizer'),
-          ),
-          ToolCard(
             icon: Icons.badge_outlined,
             title: 'ID Card Maker',
             onTap: () => Navigator.pushNamed(context, '/id-card-maker'),
           ),
+          // ... baaki tools ke liye cards
         ],
       ),
     );
   }
 }
 
-// Helper Widget for Tool Cards
 class ToolCard extends StatelessWidget {
   final IconData icon;
   final String title;
