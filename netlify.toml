@@ -1,10 +1,10 @@
 [build]
   publish = "build/web"
   command = """
-    export FLUTTER_VERSION=stable &&
-    git clone https://github.com/flutter/flutter.git --depth 1 --branch $FLUTTER_VERSION /opt/build/flutter &&
-    export PATH="/opt/build/flutter/bin/:$PATH" &&
+    git clone https://github.com/flutter/flutter.git --depth 1 --branch stable flutter &&
+    export PATH="$PATH:`pwd`/flutter/bin" &&
     flutter config --no-analytics &&
+    flutter doctor -v &&
     flutter pub get &&
-    flutter build web
+    flutter build web --release
   """
