@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+// YAHAN BADLAAV KIYA GAYA HAI: Relative paths ka istemaal kiya gaya hai
 import 'home_page.dart';
 import 'pages/background_remover_page.dart';
-import 'pages/resize_image_page.dart';
+import 'pages/change_background_page.dart';
+import 'pages/document_cropper_page.dart';
+import 'pages/format_converter_page.dart';
+import 'pages/green_screen_page.dart';
 import 'pages/id_card_maker_page.dart';
 import 'pages/passport_photo_page.dart';
-import 'pages/document_cropper_page.dart';
-import 'pages/green_screen_page.dart';
-import 'pages/format_converter_page.dart';
-import 'pages/change_background_page.dart';
+import 'pages/resize_image_page.dart';
+
 
 void main() {
   runApp(const ShopEditsApp());
@@ -53,3 +55,17 @@ class ShopEditsApp extends StatelessWidget {
     );
   }
 }
+```
+
+---
+### ## Ab Kya Karein?
+
+1.  Upar diye gaye code ko `main.dart` file mein **paste** karein.
+2.  File ko **save** karein.
+3.  Changes ko **GitHub par `push` kar dein.**
+    ```bash
+    git add .
+    git commit -m "Fix: Corrected import paths in main.dart"
+    git push
+    
+
