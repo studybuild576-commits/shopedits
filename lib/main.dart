@@ -25,8 +25,7 @@ class SnapToolsApp extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/background-remover': (context) => const BackgroundRemoverPage(),
         '/change-background': (context) => const PlaceholderPage(title: 'Change Background'),
-        '/image-resizer': (context) => const PlaceholderPage(title: 'Image Resizer'),
-        '/id-card-maker': (context) => const PlaceholderPage(title: 'ID Card Maker'),
+        // ... baaki routes
       },
       debugShowCheckedModeBanner: false,
     );
