@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shopedits/home_page.dart';
 import 'package:shopedits/pages/background_remover_page.dart';
-import 'package:shopedits/pages/placeholder_page.dart';
+import 'package:shopedits/pages/change_background_page.dart';
+import 'package:shopedits/pages/id_card_maker_page.dart';
+// Baaki pages ko yahan import karein...
 
 void main() {
   runApp(const SnapToolsApp());
@@ -24,8 +26,9 @@ class SnapToolsApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomePage(),
         '/background-remover': (context) => const BackgroundRemoverPage(),
-        '/change-background': (context) => const PlaceholderPage(title: 'Change Background'),
-        // ... baaki routes
+        '/change-background': (context) => const ChangeBackgroundPage(),
+        '/id-card-maker': (context) => const IDCardMakerPage(),
+        // Yahan baaki tools ke routes add honge
       },
       debugShowCheckedModeBanner: false,
     );
