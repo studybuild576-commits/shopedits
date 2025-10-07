@@ -1,5 +1,5 @@
-import 'dart.convert';
-import 'dart.typed_data';
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -35,7 +35,6 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
     if (_originalImageBytes == null) return;
     setState(() => _isLoading = true);
 
-    // ✅ YAHAN AAPKA SAHI, LIVE URL DAAL DIYA GAYA HAI
     const String apiUrl = 'https://rahul7273-shop-edits-images.hf.space/run/predict';
 
     try {
@@ -44,7 +43,6 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
       final response = await http.post(
         uri,
         headers: {'Content-Type': 'application/json'},
-        // fn_index: 0 batata hai ki Gradio app ka pehla tool (Background Remover) istemaal karna hai
         body: jsonEncode({ "fn_index": 0, "data": ["data:image/png;base64,$base64Image"] }),
       );
       if (response.statusCode == 200) {
@@ -103,7 +101,6 @@ class _BackgroundRemoverPageState extends State<BackgroundRemoverPage> {
   }
 }
 
-// Helper Widget for Image Display
 class ImageDisplay extends StatelessWidget {
   final String title;
   final Uint8List? imageBytes;
@@ -129,16 +126,7 @@ class ImageDisplay extends StatelessWidget {
                 ? const Center(child: CircularProgressIndicator())
                 : imageBytes != null
                     ? ClipRRect(borderRadius: BorderRadius.circular(11), child: Image.memory(imageBytes!))
-                    : Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(isResult ? Icons.auto_fix_high : Icons.add_photo_alternate_outlined, size: 60, color: Colors.grey),
-                            if (!isResult) const SizedBox(height: 8),
-                            if (!isResult) const Text("Click to Upload")
-                          ],
-                        ),
-                      ),
+                    : Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(isResult ? Icons.auto_fix_high : Icons.add_photo_alternate_outlined, size: 60, color: Colors.grey), if (!isResult) const SizedBox(height: 8), if (!isResult) const Text("Click to Upload")])),
           ),
         ),
       ],
